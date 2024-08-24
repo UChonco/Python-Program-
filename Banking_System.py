@@ -1,35 +1,65 @@
 class bankaccount:
-    def __init__(self,acc_holder):
+    def __init__(self,acc_holder,balance):
         self.acc_holder = acc_holder
-        self.balance = 0
+        self.balance = balance
 
-    def Deposit(self,acc_holder,amount ):
+    def Deposit(self,amount ):
         name = self.acc_holder
-        balance =self.balance
-        balance += amount
-        print(f"\n {"_"*60} \n Successful Deposit R{amount:.2f} from {name} Account \n(Account Balance : R{balance:.2f})\n {"_"*60}")
-
-    def Withdrawl(self,acc_holder,amount):
-        name =self.acc_holder
-        balance= self.balance
-        if amount > balance:
-            print(f"\n {"_"*60} \n Insufficient Funds !{name}  Account balance R{balance:.2f} \n {"_"*60}" )
+        if amount >0:
+            self.balance += amount
+            print(f"\n {"_"*60} \n Successful Deposit R{amount:.2f} from {name} Account \n(Account Balance : R{self.balance:.2f})\n {"_"*60}")
         else:
-            balance -= amount
-            print(f"\n {"_"*60} \n Successful widthdraw {amount:.2f} from {name} Account \n Account Balance: R{balance:.2f}\n {"_"*60}")
+            print("invalid amount ! Please Enter valid amout")
 
-    def check_balance(self,acc_holder):
+    def Withdrawl(self,amount):
         name =self.acc_holder
-        balance =self.balance
-        print(f" \n {"_"*60} {name} \n Account Balance: R{balance:.2f} \n {"_"*60}")
+
+        if amount > self.balance:
+            print(f"\n {"_"*60} \n Insufficient Funds !{name}  Account balance R{self.balance:.2f} \n {"_"*60}" )
+        elif amount <=0:
+            print("invalid amount! Please  valid amount")
+        else:
+            self.balance -= amount
+            print(f"\n {"_"*60} \n Successful widthdraw {amount:.2f} from {name} Account \n Account Balance: R{self.balance:.2f}\n {"_"*60}")
+
+    def check_balance(self):
+        name =self.acc_holder
+     
+        print(f" \n {"_"*60} \n {name} Account Balance: R{self.balance:.2f} \n {"_"*60}")
+
 
 def main():
-    user = input("Enter Name")
-    obj = bankaccount(user)
-    amount = float(input("Enter Desposit Amount: "))
-    obj.Deposit(user,amount)
-    amount1 = float(input("Enter Withdrawl Amount: "))
-    obj.Withdrawl(user,amount1)
+
+
+   user = input("Enter account holder name : ")
+   balance = 0
+   obj = bankaccount(user,balance)
+       
+   while True:
      
+ 
+
+       print(f"{"_"*60}")
+       print("1. Desposit")
+       print("2. withdraw")
+       print("3. Show Balance")
+       print("4. Exit")
+       print(f"{"_"*60}")
+       
+       choice = input("Enter your choice 1-4: ")
+       if choice == "1":
+           amount = float(input("Enter deposit amount :R"))
+           obj.Deposit(amount)
+       elif choice == "2":
+            amount =float(input("Enter withdraw amount :R "))
+            obj.Withdrawl(amount) 
+       elif choice == "3":
+            obj.check_balance()
+       elif choice == "4":
+            print("Thank You for banking with us ...")
+            break
+       
 if __name__ == "__main__":
-     main()
+    main()
+          
+      
